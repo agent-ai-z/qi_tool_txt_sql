@@ -35,9 +35,9 @@ class DocumentProcessor(VectorDB):
         self.chunk_size = kwargs.get("chunk_size", 1000)
         self.chunk_overlap = kwargs.get("chunk_overlap", 200)
         self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=self.chunk_size,
-                                                            chunk_overlap=self.chunk_overlap)
+                                                  chunk_overlap=self.chunk_overlap)
 
-    def process(self, documents):
+    def _process(self, documents):
         """
         Processes a list of documents by splitting them into smaller chunks and creating a vector store.
 

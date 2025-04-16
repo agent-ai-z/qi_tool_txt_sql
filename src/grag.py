@@ -3,7 +3,6 @@ from typing import Any
 from src.query_engine import QueryEngine
 
 class GraphRAG(QueryEngine):
-    query_engine = None
 
     def __init__(self, **kwargs : Any):
         """
@@ -20,28 +19,4 @@ class GraphRAG(QueryEngine):
         """
         super().__init__(**kwargs)
 
-    def process_documents(self, documents):
-        """
-        Processes a list of documents by splitting them into chunks, embedding them, and building a knowledge graph.
-
-        Args:
-        - documents (list of str): A list of documents to be processed.
-
-        Returns:
-        - None
-        """
-        splits = self.process(documents)
-        self.build_graph(splits)
-
-    def query(self, query: str):
-        """
-        Handles a query by retrieving relevant information from the knowledge graph and visualizing the traversal path.
-
-        Args:
-        - query (str): The query to be answered.
-
-        Returns:
-        - str: The response to the query.
-        """
-        response, traversal_path, filtered_content = self.query_engine.query(query)
-        return response
+        # TODO: Initialize the neojs graph and save it in the knowledge graph

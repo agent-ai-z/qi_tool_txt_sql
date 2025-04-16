@@ -85,7 +85,7 @@ class KnowledgeGraph(DocumentProcessor):
         texts = [split.page_content for split in splits]
         return self.embedchain.embed_documents(texts)
 
-    def build_graph(self, splits):
+    def _build_graph(self, splits):
         """
         Builds the knowledge graph by adding nodes, creating embeddings, extracting concepts, and adding edges.
 

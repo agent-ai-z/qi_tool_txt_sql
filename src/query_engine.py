@@ -190,7 +190,7 @@ class QueryEngine(KnowledgeGraph):
 
         return expanded_context, traversal_path, filtered_content, final_answer
 
-    def query(self, query: str) -> Tuple[str, List[int], Dict[int, str]]:
+    def query(self, query: str) -> dict[str, Any]:
         """
         Processes a query by retrieving relevant documents, expanding the context, and generating the final answer.
 
@@ -223,13 +223,15 @@ class QueryEngine(KnowledgeGraph):
             else:
                 logger.info("\nComplete answer found during traversal.")
 
-            logger.info(f"\nFinal Answer: {final_answer}")
-            logger.info(f"\nTotal Tokens: {cb.total_tokens}")
-            logger.info(f"Prompt Tokens: {cb.prompt_tokens}")
-            logger.info(f"Completion Tokens: {cb.completion_tokens}")
-            logger.info(f"Total Cost (USD): ${cb.total_cost}")
-
-        return final_answer, traversal_path, filtered_content
+        return {
+            "answer": final_answer,
+            "traversal_path": traversal_path,
+            "filtered_content": filtered_content,
+            "total_tokens": cb.total_tokens,
+            "prompt_tokens": cb.prompt_tokens,
+            "completion_tokens": cb.completion_tokens,
+            "total_cost": cb.total_cost
+        }
 
     def _retrieve_relevant_documents(self, query: str):
         logger.info("\nRetrieving relevant documents...")
